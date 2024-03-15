@@ -149,8 +149,9 @@ echo "vendor device subvendor subdevice class class_mask driver_data" > \
 
 请在适当的地方标记初始化和清理函数（相应的宏在 <linux/init.h> 中定义）：
 
-| __init | 初始化代码。在驱动程序初始化后丢弃。 |
+|        |                                      |
 | ------ | ------------------------------------ |
+| __init | 初始化代码。在驱动程序初始化后丢弃。 |
 | __exit | 退出代码。对于非模块化驱动程序忽略。 |
 
 关于何时/何地使用上述属性的提示：
@@ -348,8 +349,9 @@ MSI 和 MSI-X 是 PCI 功能。两者都是“消息信号中断”，通过 DMA
 
 ## 1.7. 其他有趣的函数
 
-| [`pci_get_domain_bus_and_slot()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_domain_bus_and_slot) | 查找与给定域、总线、插槽和编号相对应的 pci_dev 。如果找到该设备，则会增加其引用计数。 |
+|                                                              |                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [`pci_get_domain_bus_and_slot()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_domain_bus_and_slot) | 查找与给定域、总线、插槽和编号相对应的 pci_dev 。如果找到该设备，则会增加其引用计数。 |
 | [`pci_set_power_state()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_set_power_state) | 设置 PCI 电源管理状态（0=D0 … 3=D3）                         |
 | [`pci_find_capability()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_find_capability) | 在设备的功能列表中查找指定的功能                             |
 | pci_resource_start()                                         | 返回给定 PCI 区域的总线起始地址                              |
@@ -384,8 +386,9 @@ MSI 和 MSI-X 是 PCI 功能。两者都是“消息信号中断”，通过 DMA
 
 当您尝试将旧的驱动程序移植到新的 PCI 接口时，可能会遇到几个功能。它们不再存在于内核中，因为它们与热插拔或 PCI 域不兼容，或者具有正常锁定。
 
-| pci_find_device()                                            | 由 [`pci_get_device()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_device) 替代 |
+|                                                              |                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| pci_find_device()                                            | 由 [`pci_get_device()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_device) 替代 |
 | pci_find_subsys()                                            | 由 [`pci_get_subsys()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_subsys) 替代 |
 | pci_find_slot()                                              | 由 [`pci_get_domain_bus_and_slot()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_domain_bus_and_slot) 替代 |
 | [`pci_get_slot()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_slot) | 由 [`pci_get_domain_bus_and_slot()`](https://docs.kernel.org/driver-api/pci/pci.html#c.pci_get_domain_bus_and_slot) 替代 |

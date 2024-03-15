@@ -11,6 +11,23 @@ Linux 内核文档有非常多高质量的文档，但国内的翻译项目貌�
 
 # 目录
 
-**数量有限则暂时不进行分类，文件名根据文档相应的 URL 命名**
+**数量有限则暂时不进行分类**
 
 1. [PCI 总线子系统](pci_index.md)
+
+# 注意事项
+
+- markdown 文件名根据文档相应的 URL 命名，字母均为小写。
+
+  例如，https://docs.kernel.org/PCI/index.html 的翻译文档命名为 pci_index.md 。
+
+- 原文中的表格可以按照 markdown 表格语法制作，但表头设为空行。
+
+- GitHub中锚点的生成规则为：
+
+  - 英文大写转换为小写
+
+  - 空格替换为短划线 `-`
+  - 省略标题中的 `.`  `(`   `)` 符号
+
+  例如：标题 `## 1.2. pci_register_driver() 调用` 转换为 `#12-pci_register_driver-调用`
