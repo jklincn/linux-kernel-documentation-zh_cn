@@ -77,19 +77,19 @@ struct pci_driver {
 
 - `name`：驱动程序名称。
 - `id_table`：指向驱动程序感兴趣的设备 ID 表的指针。大多数驱动程序应该使用MODULE_device_table（pci, …）导出此表。
-- `probe`：对于与 ID 表匹配且尚未被其他驱动程序“拥有”的所有 PCI 设备，将调用此探测函数（在为现有设备执行 pci_register_driver() 期间，或在插入新设备后执行）。此函数为 ID 表中条目与设备匹配的每个设备传递一个“struct pci_dev*”。当驱动程序选择获得设备的“所有权”或错误代码（负数）时，探测函数返回零。探测函数总是从进程上下文中调用，因此它可以休眠。
-- `remove`：每当删除此驱动程序处理的设备时（在注销驱动程序期间或从可热插拔插槽中手动拔出时），就会调用remove() 函数。remove 函数总是从进程上下文中调用，因此它可以休眠。
+- `probe`：对于与 ID 表匹配且尚未被其他驱动程序“拥有”的所有 PCI 设备，将调用此探测函数（在为现有设备执行 pci_register_driver() 期间，或在插入新设备后执行）。此函数为 ID 表中条目与设备匹配的每个设备传递一个 “struct pci_dev*” 。当驱动程序选择获得设备的“所有权”或错误代码（负数）时，探测函数返回零。探测函数总是从进程上下文中调用，因此它可以休眠。
+- `remove`：每当删除此驱动程序处理的设备时（在注销驱动程序期间或从可热插拔插槽中手动拔出时），就会调用 remove() 函数。remove 函数总是从进程上下文中调用，因此它可以休眠。
 - `suspend`：将设备置于低功率状态。
 - `resume`：将设备从低功率状态唤醒。（有关PCI电源管理和相关功能的说明，请参阅[PCI电源管理](https://docs.kernel.org/power/pci.html)。）
 - `shutdown`：挂入 reboot_notifier_list (kernel/sys.c) 。旨在停止任何空闲 DMA 操作。用于在重新启动之前启用局域网唤醒（NIC）或更改设备的电源状态。例如 drivers/net/e100.c。
 - `sriov_configure`：可选的驱动程序回调，允许通过 sysfs 的 “sriov_numvfs”文件配置要启用的 VF 数量。
 - `sriov_set_msix_vec_count`：PF 驱动程序回调以更改 VF 上 MSI-X 矢量的数量。通过 sysfs 的 “sriov_vf_mix_count” 触发。这将更改 VF 消息控制寄存器中的 MSI-X 表大小。
-- `sriov_get_vf_total_msix`：PF驱动程序回调，以获得可用于分配给VF的MSI-X矢量的总数。
+- `sriov_get_vf_total_msix`：PF 驱动程序回调，以获得可用于分配给 VF 的 MSI-X 向量的总数。
 - `err_handler`：见 [PCI 错误恢复](https://docs.kernel.org/PCI/pci-error-recovery.html)。
 - `groups`：Sysfs 属性组。
 - `dev_groups`：绑定到驱动程序后将创建的附加到设备的属性。
 - `driver`：驱动程序模型结构
-- `dynids`：动态添加的设备ID的列表。
+- `dynids`：动态添加的设备 ID 的列表。
 - `driver_managed_dma`：设备驱动程序不使用内核 DMA API 进行 DMA 。对于大多数设备驱动程序，只要所有 DMA 都是通过内核 DMA API 处理的，就不需要关心这个标志。对于一些特殊的驱动程序，例如 VFIO 驱动程序，他们知道如何自己管理 DMA 并设置此标志，以便 IOMMU 层允许他们设置和管理自己的 I/O 地址空间。
 
 id_table 是一个 pci_device_id 数组，以全零的条目结尾。通常情况下，使用 `static const` 进行定义会更好。
