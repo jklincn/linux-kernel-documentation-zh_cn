@@ -32,3 +32,11 @@ Linux 内核文档有非常多高质量的文档，但国内的翻译项目貌�
   - 省略标题中的 `.`  `(`   `)` 符号
 
   例如：标题 `## 1.2. pci_register_driver() 调用` 转换为 `#12-pci_register_driver-调用`
+  
+- Commit 信息规范：\<type\> <filename\>
+
+  其中 \<type\> 可以为以下类型，filename 去除 md 后缀
+  
+  - add：添加新文档
+  - update：更新文档内容
+  - style：仅做格式的修改
