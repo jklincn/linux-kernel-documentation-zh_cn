@@ -30,20 +30,19 @@
   - [2.4. 配置 PCI Express 端口总线驱动程序与服务驱动程序](pci_pciebus-howto.md#24-配置-pci-express-端口总线驱动程序与服务驱动程序)
   - [2.5. 可能的资源冲突](pci_pciebus-howto.md#25-可能的资源冲突)
   
-- 3.PCI Express I/O 虚拟化指南
-  - 3.1. 概述
-  - 3.2. 用户指南
-  - 3.3. 开发者指南
+- [3. PCI Express I/O 虚拟化指南](pci_pci-iov-howto.md)
+  - [3.1. 概述](pci_pci-iov-howto.md#31-概述)
+  - [3.2. 用户指南](pci_pci-iov-howto.md#32-用户指南)
+  - [3.3. 开发者指南](pci_pci-iov-howto.md#32-开发者指南)
   
 - 4.MSI 驱动程序指南
-
   - 4.1. 关于本指南
   - 4.2. 什么是 MSI
   - 4.3. 为什么使用 MSI
   - 4.4. 如何使用 MSI
   - 4.5. MSI 怪癖
   - 4.6. 设备驱动程序 MSI(-X)  API 列表
-
+  
 - 5.通过 sysfs 访问 PCI 设备资源
 
   - 5.1. 通过 sysfs 访问 legacy 资源
