@@ -11,7 +11,6 @@
 **已知问题：二级目录需要右键-在新标签页中打开链接才能正确跳转**
 
 - [1. 如何编写 Linux PCI 驱动程序](pci_pci.md)
-
   - [1.1. PCI 驱动程序的结构](pci_pci.md#11-pci-驱动程序的结构)
   - [1.2. pci_register_driver() 调用](pci_pci.md#12-pci_register_driver-调用)
   - [1.3. 如何手动查找 PCI 设备](pci_pci.md#13-如何手动查找-PCI-设备)
@@ -23,20 +22,19 @@
   - [1.9. 供应商和设备ID](pci_pci.md#19-供应商和设备ID)
   - [1.10. 过时的功能](pci_pci.md#110-过时的功能)
   - [1.11. MMIO 空间和写入过账](pci_pci.md#111-MMIO-空间和写入过账)
-
-- 2.PCI Express 端口总线驱动程序指南 
-  - 2.1. 关于本指南
-  - 2.2. 什么是 PCI Express 端口总线驱动程序
-  - 2.3. 为什么使用 PCI Express 端口总线驱动程序
-  - 2.4. 配置 PCI Express 端口总线驱动程序与服务驱动程序
-  - 2.5. 可能的资源冲突
+  
+- [2. PCI Express 端口总线驱动程序指南](pci_pciebus-howto.md)
+  - [2.1. 关于本指南](pci_pciebus-howto.md#21-关于本指南)
+  - [2.2. 什么是 PCI Express 端口总线驱动程序](pci_pciebus-howto.md#22-什么是-pci-express-端口总线驱动程序)
+  - [2.3. 为什么使用 PCI Express 端口总线驱动程序](pci_pciebus-howto.md#23-为什么使用-pci-express-端口总线驱动程序)
+  - [2.4. 配置 PCI Express 端口总线驱动程序与服务驱动程序](pci_pciebus-howto.md#24-配置-pci-express-端口总线驱动程序与服务驱动程序)
+  - [2.5. 可能的资源冲突](pci_pciebus-howto.md#25-可能的资源冲突)
   
 - 3.PCI Express I/O 虚拟化指南
-
   - 3.1. 概述
   - 3.2. 用户指南
   - 3.3. 开发者指南
-
+  
 - 4.MSI 驱动程序指南
 
   - 4.1. 关于本指南
