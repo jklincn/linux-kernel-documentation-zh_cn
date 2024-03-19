@@ -27,7 +27,7 @@ jobs:
 
       - name: update
         run: |
-          COUNT=$(find . -name '*.json' -exec cat {} \; | wc -m)
+          COUNT=$(find . -name '*.md' -exec cat {} \; | wc -m)
           curl -L \
             -X PATCH \
             -H "Accept: application/vnd.github+json" \
