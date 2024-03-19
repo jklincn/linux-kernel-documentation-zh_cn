@@ -34,7 +34,7 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -o response.json -s -w '%{http_code}' \
             https://api.github.com/gists/feda703c740af0973eed518fbb50c1bb \
-            -d '{"files":{"WordCount":{"content":"'"${COUNT}"'"}}}')
+            -d '{"files":{"WordCount.json":{"content":"count: '"${COUNT}"'"}}}')
           if [ "$HTTP_STATUS" -ne 200 ]; then
             exit $HTTP_STATUS   
           fi
