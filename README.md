@@ -11,18 +11,14 @@ Linux 内核文档有非常多高质量的文档，但国内的翻译项目貌�
 
 # 目录
 
-**数量有限则暂时不进行分类**
-
-1. [PCI 总线子系统](pci_index.md)
-1. [NTB 驱动程序](driver-api_ntb.md)
+1. [PCI 总线子系统](pci/index.md)
+1. [驱动程序开发者的 API 指南](driver-api/index.md)
 
 # 注意事项
 
-- markdown 文件名根据文档相应的 URL 命名，字母均为小写。
+- 文件路径严格按照官方文档设置，字母均为小写。
 
-  例如，https://docs.kernel.org/PCI/index.html 的翻译文档命名为 pci_index.md 。
-
-- 原文中的表格可以按照 markdown 表格语法制作，但表头设为空行。
+  例如：https://docs.kernel.org/driver-api/pci/p2pdma.html 在仓库中的路径为 `driver-api/pci/p2pdma.md`
 
 - GitHub中锚点的生成规则为：
 
@@ -32,15 +28,11 @@ Linux 内核文档有非常多高质量的文档，但国内的翻译项目貌�
   - 省略标题中的 `.`  `(`   `)` 符号
 
   例如：标题 `## 1.2. pci_register_driver() 调用` 转换为 `#12-pci_register_driver-调用`
-  
-- 文件路径严格按照官方文档设置
 
-  例如：https://docs.kernel.org/driver-api/pci/p2pdma.html 在仓库中的路径为 `driver-api/pci/p2pdma.md`
-  
 - Commit 信息规范：\<type\>: <filename\>, ..., <filename\>
 
   其中 \<type\> 可以为以下类型，filename 为完整的相对路径，去除 md 后缀
-  
+
   - add：添加新文档
   - update：更新文档内容
   - style：仅做格式的修改
