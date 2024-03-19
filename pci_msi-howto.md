@@ -175,7 +175,7 @@ PCI/MSI 子系统有一个专门的 C 文件用于其导出的设备驱动程序
 
 > 译者注：此处不翻译 API 内容，有关 API 参数、描述、注意、返回值等信息可以查看[原文](https://docs.kernel.org/PCI/msi-howto.html#list-of-device-drivers-msi-x-apis)。另外，较新的内核版本（比如 5.4）已经不同，文件已修改为 *drivers/pci/msi.c* ，且部分函数已弃用。
 
-| 函数                                                         | 简介                                                         |
+| 函数                                                         | 功能                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | int **pci_enable_msi**(struct pci_dev *dev)                  | 在设备上启用 MSI 中断模式                                    |
 | void **pci_disable_msi**(struct pci_dev *dev)                | 在设备上禁用 MSI 中断模式                                    |
