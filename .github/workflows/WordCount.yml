@@ -28,7 +28,7 @@ jobs:
       - name: update
         run: |
           COUNT=$(find . -name '*.md' -exec cat {} \; | wc -m)
-          JSON_PAYLOAD=$(printf '{"files":{"WordCount.json":{"content":"{\\"count\\": \\"%s\\"}"}}}' "${COUNT}")
+          JSON_PAYLOAD="{\"files\":{\"WordCount.json\":{\"content\":\"{\\\"count\\\": \\\"${COUNT}\\\"}\"}}}"
           HTTP_STATUS=$(curl -L -X PATCH \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GIST_TOKEN }}" \
