@@ -35,13 +35,13 @@
   - [3.2. 用户指南](pci_pci-iov-howto.md#32-用户指南)
   - [3.3. 开发者指南](pci_pci-iov-howto.md#32-开发者指南)
   
-- 4.MSI 驱动程序指南
-  - 4.1. 关于本指南
-  - 4.2. 什么是 MSI
-  - 4.3. 为什么使用 MSI
-  - 4.4. 如何使用 MSI
-  - 4.5. MSI 怪癖
-  - 4.6. 设备驱动程序 MSI(-X)  API 列表
+- [4. MSI 驱动程序指南](pci_msi-howto.md)
+  - [4.1. 关于本指南](pci_msi-howto.md#41-关于本指南)
+  - [4.2. 什么是 MSI](pci_msi-howto.md#42-什么是-msi)
+  - [4.3. 为什么使用 MSI](pci_msi-howto.md#43-为什么使用-msi)
+  - [4.4. 如何使用 MSI](pci_msi-howto.md#44-如何使用-msi)
+  - [4.5. MSI 异常情况](pci_msi-howto.md#45-msi-异常情况)
+  - [4.6. 设备驱动程序 MSI(-X) API 列表](pci_msi-howto.md#46-设备驱动程序-msi-x-api-列表)
   
 - 5.通过 sysfs 访问 PCI 设备资源
 
@@ -51,9 +51,8 @@
 - 6.PCI 主桥的 ACPI 注意事项
 
 - 7.PCI 错误恢复
-
   - 7.1. 详细设计
-
+  
 - 8.PCI Express 高级错误报告驱动程序指南
 
   - 8.1. 概述
