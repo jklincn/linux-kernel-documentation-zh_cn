@@ -30,13 +30,15 @@ jobs:
       - name: update
         run: |
           COUNT=$(find . -name '*.md' -exec cat {} \; | wc -m)
+          ARTICLE=$(find . -type f -name '*.md' ! -name 'index.md' ! -name 'README.md' | wc -l)
+          CONTENT=$(printf "count=%s\narticle=%s" "${COUNT}" "$(ARTICLE)")
           HTTP_STATUS=$(curl -L -X PATCH \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GIST_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -o response.json -s -w '%{http_code}' \
             https://api.github.com/gists/feda703c740af0973eed518fbb50c1bb \
-            -d '{"files":{"WordCount.toml":{"content":"count='"${COUNT}"'"}}}')
+            -d '{"files":{"WordCount.toml":{"content":"'"${CONTENT}"'"}}}')
           if [ "$HTTP_STATUS" -ne 200 ]; then
             exit $HTTP_STATUS   
           fi
