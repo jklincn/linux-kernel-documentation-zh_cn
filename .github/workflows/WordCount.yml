@@ -29,7 +29,7 @@ jobs:
 
       - name: update
         run: |
-          COUNT=$(find . -name '*.md' -exec cat {} \; | wc -m)
+          COUNT=$(find . -name '*.md' ! -name 'index.md' ! -name 'README.md' -exec cat {} \; | wc -m)
           ARTICLE=$(find . -type f -name '*.md' ! -name 'index.md' ! -name 'README.md' | wc -l)
           CONTENT="count=${COUNT}\narticle=${ARTICLE}"
           HTTP_STATUS=$(curl -L -X PATCH \
