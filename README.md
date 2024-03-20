@@ -13,13 +13,13 @@ Linux 内核文档有非常多高质量的文档，但国内的翻译项目貌�
 
 # 目录
 
-1. [核心 API 文档](core-api/index.md)
-1. [PCI 总线子系统](pci/index.md)
-1. [驱动程序开发者的 API 指南](driver-api/index.md)
+1. [核心 API 文档](core-api/README.md)
+1. [PCI 总线子系统](pci/README.md)
+1. [驱动程序开发者的 API 指南](driver-api/README.md)
 
 # 注意事项
 
-- 文件路径严格按照官方文档设置，字母均为小写。
+- 文件路径严格按照官方文档设置，字母均为小写。`index.html` 修改为 `README.md`，便于在 GitHub 中浏览
 
   例如：`https://docs.kernel.org/driver-api/pci/p2pdma.html` 在仓库中的路径为 `driver-api/pci/p2pdma.md`
 
