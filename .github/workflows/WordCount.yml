@@ -31,7 +31,7 @@ jobs:
         run: |
           COUNT=$(find . -name '*.md' -exec cat {} \; | wc -m)
           ARTICLE=$(find . -type f -name '*.md' ! -name 'index.md' ! -name 'README.md' | wc -l)
-          CONTENT=$(printf "count=%s\narticle=%s" "${COUNT}" "${ARTICLE}")
+          CONTENT="count=${COUNT}\narticle=${ARTICLE}"
           HTTP_STATUS=$(curl -L -X PATCH \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GIST_TOKEN }}" \
