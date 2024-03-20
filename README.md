@@ -2,9 +2,6 @@
 
 ![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fgist.githubusercontent.com%2Fjklincn%2Ffeda703c740af0973eed518fbb50c1bb%2Fraw&query=%24.count&style=flat-square&label=%E5%AD%97%E7%AC%A6%E7%BB%9F%E8%AE%A1)![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fgist.githubusercontent.com%2Fjklincn%2Ffeda703c740af0973eed518fbb50c1bb%2Fraw%2F&query=%24.article&style=flat-square&label=%E6%96%87%E7%AB%A0%E6%95%B0%E9%87%8F)
 
-------
-
-
 Linux 内核文档有非常多高质量的文档，但国内的翻译项目貌似都已经停止：
 
 1. https://docs.kernel.org/translations/zh_CN/index.html
