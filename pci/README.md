@@ -43,11 +43,10 @@
   - [4.5. MSI 异常情况](msi-howto.md#45-msi-异常情况)
   - [4.6. 设备驱动程序 MSI(-X) API 列表](msi-howto.md#46-设备驱动程序-msi-x-api-列表)
   
-- 5.通过 sysfs 访问 PCI 设备资源
-
-  - 5.1. 通过 sysfs 访问 legacy 资源
-  - 5.2. 支持新平台上的 PCI 访问
-
+- [5. 通过 sysfs 访问 PCI 设备资源](sysfs-pci.md)
+  - [5.1. 通过 sysfs 访问传统资源](sysfs-pci.md#51-通过-sysfs-访问传统资源)
+  - [5.2. 支持新平台上的 PCI 访问](sysfs-pci.md#52-支持新平台上的-pci-访问)
+  
 - 6.PCI 主桥的 ACPI 注意事项
 
 - 7.PCI 错误恢复
