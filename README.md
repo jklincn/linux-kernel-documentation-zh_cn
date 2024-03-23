@@ -16,6 +16,7 @@ Linux 内核文档有非常多高质量的文档，但国内的翻译项目貌�
 1. [核心 API 文档](core-api/README.md)
 1. [PCI 总线子系统](pci/README.md)
 1. [驱动程序开发者的 API 指南](driver-api/README.md)
+1. [Linux 跟踪技术](trace/README.md)
 
 # 注意事项
 
