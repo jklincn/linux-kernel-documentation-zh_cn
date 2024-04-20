@@ -12,9 +12,9 @@
 
 内核提供了各种各样的接口来支持设备驱动程序的开发。本文档只是其中一些接口的一个有组织的集合——希望随着时间的推移，它会变得更好！可用的子部分如下所示。
 
-## General information for driver authors
+## 设备驱动开发者须知文档
 
-This section contains documentation that should, at some point or other, be of interest to most developers working on device drivers.
+本节包含大多数从事设备驱动程序开发的开发人员在某些时候应该感兴趣的文档。
 
 - [Driver Basics](https://docs.kernel.org/driver-api/basics.html)
 - [Driver Model](https://docs.kernel.org/driver-api/driver-model/index.html)
@@ -35,7 +35,7 @@ This section contains documentation that should, at some point or other, be of i
 - [Component Helper for Aggregate Drivers](https://docs.kernel.org/driver-api/component.html)
 - [The io_mapping functions](https://docs.kernel.org/driver-api/io-mapping.html)
 - [Ordering I/O writes to memory-mapped addresses](https://docs.kernel.org/driver-api/io_ordering.html)
-- [The Userspace I/O HOWTO](https://docs.kernel.org/driver-api/uio-howto.html)
+- [用户空间 I/O 指南](./uio-howto.md)
 - [VFIO Mediated devices](https://docs.kernel.org/driver-api/vfio-mediated-device.html)
 - [VFIO - “Virtual Function I/O”](https://docs.kernel.org/driver-api/vfio.html)
 - [Acceptance criteria for vfio-pci device specific driver variants](https://docs.kernel.org/driver-api/vfio-pci-device-specific-driver-acceptance.html)
