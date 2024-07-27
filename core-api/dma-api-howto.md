@@ -48,9 +48,9 @@ I/O 设备使用第三种地址：“总线地址”。如果设备在 MMIO 地�
           +-------+             +------+
 ```
 
-在枚举过程中，内核发现 I/O 设备及其 MMIO 空间以及将它们连接到系统的主桥。例如，如果 PCI 设备有一个 BAR，内核会从 BAR 读取总线地址（A）并将其转换为 CPU 物理地址（B）。地址 B 存储在资源结构体（struct resource）中，通常通过 /proc/iomem 公开。当驱动程序声明一个设备时，它通常使用 [ioremap()](https://docs.kernel.org/driver-api/device-io.html#c.ioremap) 将物理地址 B 映射到虚拟地址（C）。然后，它可以使用例如 ioread32（C）来访问总线地址 A 处的设备寄存器。
+在枚举过程中，内核发现 I/O 设备及其 MMIO 空间以及将它们连接到系统的主桥。例如，如果 PCI 设备有一个 BAR，内核会从 BAR 读取总线地址（A）并将其转换为 CPU 物理地址（B）。地址 B 存储在资源结构体（struct resource）中，通常通过 /proc/iomem 公开。当驱动程序声明一个设备时，它通常使用 [`ioremap()`](https://docs.kernel.org/driver-api/device-io.html#c.ioremap) 将物理地址 B 映射到虚拟地址（C）。然后，它可以使用例如 ioread32（C）来访问总线地址 A 处的设备寄存器。
 
-如果设备支持 DMA，驱动程序将使用 [kmalloc()](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc) 或类似接口设置缓冲区，返回虚拟地址（X）。虚拟内存系统将 X 映射到系统 RAM 中的物理地址（Y）。驱动程序可以使用虚拟地址 X 访问缓冲区，但设备本身不能，因为 DMA 不通过 CPU 虚拟内存系统。
+如果设备支持 DMA，驱动程序将使用 [`kmalloc()`](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc) 或类似接口设置缓冲区，返回虚拟地址（X）。虚拟内存系统将 X 映射到系统 RAM 中的物理地址（Y）。驱动程序可以使用虚拟地址 X 访问缓冲区，但设备本身不能，因为 DMA 不通过 CPU 虚拟内存系统。
 
 在一些简单的系统中，设备可以直接对物理地址 Y 进行 DMA。但在许多其他系统中，会有 IOMMU 硬件来将 DMA 地址转换为物理地址，例如，将 Z 转换为 Y。这是 DMA API 的部分原因：驱动程序可以向 dma_map_single() 等接口提供虚拟地址 X，该接口设置任何所需的 IOMMU 映射并返回 DMA 地址 Z。然后，驱动程序告诉设备对 Z 进行 DMA，IOMMU 将其映射到系统 RAM 中地址 Y 的缓冲区。
 
@@ -72,13 +72,13 @@ I/O 设备使用第三种地址：“总线地址”。如果设备在 MMIO 地�
 
 首先，你必须了解哪些内核内存可以用于 DMA 映射工具。关于这一点，曾经有一套不成文的规则，而本文尝试最终将其记录下来。
 
-如果你通过页面分配器获取内存（例如，__get_free_page*()）或者通用内存分配器（例如，[kmalloc()](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc) 或 [kmem_cache_alloc()](https://docs.kernel.org/core-api/mm-api.html#c.kmem_cache_alloc)），那么你可以使用这些函数返回的地址进行 DMA 操作。
+如果你通过页面分配器获取内存（例如，__get_free_page*()）或者通用内存分配器（例如，[`kmalloc()`](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc) 或 [`kmem_cache_alloc()`](https://docs.kernel.org/core-api/mm-api.html#c.kmem_cache_alloc)），那么你可以使用这些函数返回的地址进行 DMA 操作。
 
 具体来说，这意味着你不能使用 vmalloc() 返回的内存/地址进行 DMA。可以对映射到 vmalloc() 区域的底层内存进行 DMA，但这需要遍历页表以获取物理地址，然后使用类似 __va() 的东西将这些页翻译回内核地址。[注：当我们整合 Gerd Knorr 的通用代码来完成这个操作时，会更新此部分内容。]
 
 这条规则还意味着你不能使用内核映像地址（数据段/文本段/BSS段中的条目），也不能使用模块映像地址，或堆栈地址进行 DMA。这些地址可能与物理内存的其他部分完全不同。即使这些类型的内存可以物理上支持 DMA，你也需要确保 I/O 缓冲区是缓存行对齐的。否则，在具有 DMA 不一致缓存的 CPU 上，你会遇到缓存行共享问题（数据损坏）。例如，CPU 可能会写入一个字，而 DMA 会写入同一缓存行中的另一个字，这可能导致其中一个被覆盖。
 
-此外，这意味着你不能使用 kmap() 调用返回的地址进行DMA操作。这与 vmalloc() 类似。
+此外，这意味着你不能使用 [`kmap()`](https://docs.kernel.org/mm/highmem.html#c.kmap) 调用返回的地址进行 DMA 操作。这与 vmalloc() 类似。
 
 那么块 I/O 和网络缓冲区呢？块 I/O 和网络子系统确保它们使用的缓冲区是有效的，可以进行 DMA 操作。
 
@@ -241,7 +241,7 @@ if (!dma_set_mask(dev, RECORD_ADDRESS_BITS)) {
   >
   > 此外，在某些平台上，驱动程序可能需要刷新 CPU 写缓冲区，就像需要刷新 PCI 桥中的写缓冲区一样（例如，在写入寄存器值后读取该寄存器的值）。
 
-- 流式DMA映射，通常为一次 DMA 传输映射，之后立即取消映射（除非你使用下面的 dma_sync_* ），硬件可以针对顺序访问进行优化。
+- 流式 DMA 映射，通常为一次 DMA 传输映射，之后立即取消映射（除非你使用下面的 dma_sync_* ），硬件可以针对顺序访问进行优化。
 
   可以将“流式”视为“异步”或“在一致性域之外”。
 
@@ -561,7 +561,7 @@ my_card_interrupt_handler(int irq, void *devid, struct pt_regs *regs)
   }
   ```
 
-- 在多页映射尝试中，如果在中间发生映射错误，取消已经映射的页。这些示例也适用于dma_map_page()。
+- 在多页映射尝试中，如果在中间发生映射错误，取消已经映射的页。这些示例也适用于 dma_map_page()。
 
 示例 1：
 
