@@ -59,7 +59,7 @@ struct dma_pool *dma_pool_create(const char *name, struct device *dev,
 
 [`dma_pool_create()`](https://docs.kernel.org/core-api/mm-api.html#c.dma_pool_create) 为给定设备初始化一个 DMA 一致性缓冲区池。它必须在可以睡眠的上下文中调用。
 
-“name” 用于诊断（类似于结构体 kmem_cache 的 name 字段）；dev 和 size 与你传递给 dma_alloc_coherent() 的相似。"align" 是这类数据的设备硬件对齐要求（以字节为单位，并且必须是 2 的幂）。如果你的设备没有越界限制，请为alloc 传递 0；传递 4096 表示从这个池分配的内存不能跨越 4KByte 的边界。
+“name” 用于诊断（类似于结构体 kmem_cache 的 name 字段）；dev 和 size 与你传递给 dma_alloc_coherent() 的相似。"align" 是这类数据的设备硬件对齐要求（以字节为单位，并且必须是 2 的幂）。如果你的设备没有越界限制，请为 alloc 传递 0；传递 4096 表示从这个池分配的内存不能跨越 4K 字节的边界。
 
 ```c
 void *dma_pool_zalloc(struct dma_pool *pool, gfp_t mem_flags,
@@ -231,7 +231,7 @@ int dma_map_sg(struct device *dev, struct scatterlist *sg,
 
 与其他映射接口一样，dma_map_sg() 也可能失败。当它失败时，返回 0，并且驱动程序必须采取适当的行动。对于驱动程序来说，采取一些行动是至关重要的，即使是块驱动程序中止请求或发生内核错误也比什么都不做好，因为什么都不做可能会损坏文件系统。
 
-使用散列列表时，您可以像这样使用由此产生的映射：
+使用散列表时，您可以像这样使用由此产生的映射：
 
 ```c
 int i, count = dma_map_sg(dev, sglist, nents, direction);
@@ -247,7 +247,7 @@ for_each_sg(sglist, sg, count, i) {
 
 该实现可以自由地将几个连续的 sglist 条目合并为一个（例如，使用 IOMMU，或者如果几个页面恰好物理连续）并返回它映射到的实际 sg 条目数。失败时返回 0 。
 
-然后您应该循环 count 次（注意：这可以少于 nents 次），并使用 sg_dma_address() 和 sg_dma_len() 宏来获取DMA映射的地址和长度，代替之前直接访问散列列表元素的 sg->address 和 sg->length 属性。
+然后您应该循环 count 次（注意：这可以少于 nents 次），并使用 sg_dma_address() 和 sg_dma_len() 宏来获取DMA映射的地址和长度，代替之前直接访问散列表元素的 sg->address 和 sg->length 属性。
 
 ```c
 void dma_unmap_sg(struct device *dev, struct scatterlist *sg,
@@ -358,7 +358,7 @@ struct page *dma_alloc_pages(struct device *dev, size_t size, dma_addr_t *dma_ha
 
 dir 参数指定设备是读取还是写入数据，详细信息请参见 dma_map_single() 。
 
-gfp 参数允许调用者指定分配的 GFP_ 标志（参见 [`kmalloc()`](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc)），但拒绝用于指定内存区域的标志，如GFP_DMA 或 GFP_HIGHMEM 。
+gfp 参数允许调用者指定分配的 GFP_ 标志（参见 [`kmalloc()`](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc)），但拒绝用于指定内存区域的标志，如 GFP_DMA 或 GFP_HIGHMEM 。
 
 在将内存交给设备之前，需要调用 dma_sync_single_for_device()，在读取设备写入的内存之前，需要调用 dma_sync_single_for_cpu() ，就像重复使用的流式 DMA 映射一样。
 
@@ -397,13 +397,13 @@ struct sg_table *dma_alloc_noncontiguous(struct device *dev, size_t size,
                         unsigned long attrs);
 ```
 
-此函数分配 \<size\> 字节的非一致性且可能是非连续的内存。它返回一个指向 sg_table 结构体的指针，该指针描述已分配和 DMA 映射的内存，如果分配失败则返回 NULL 。得到的内存可用于映射到散列列表中的页结构体。
+此函数分配 \<size\> 字节的非一致性且可能是非连续的内存。它返回一个指向 sg_table 结构体的指针，该指针描述已分配和 DMA 映射的内存，如果分配失败则返回 NULL 。得到的内存可用于映射到散列表中的页结构体。
 
 返回的 sg_table 保证有一个单独的 DMA 映射段，如 sgt->nents 所示，但它可能有多个 CPU 的段，如 sgt->orig_nents 所示。
 
 dir 参数指定设备是读取还是写入数据，详细信息请参见 dma_map_single() 。
 
-gfp 参数允许调用者指定分配的 GFP_ 标志（参见 [`kmalloc()`](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc)），但拒绝用于指定内存区域的标志，如GFP_DMA 或 GFP_HIGHMEM 。
+gfp 参数允许调用者指定分配的 GFP_ 标志（参见 [`kmalloc()`](https://docs.kernel.org/core-api/mm-api.html#c.kmalloc)），但拒绝用于指定内存区域的标志，如 GFP_DMA 或 GFP_HIGHMEM 。
 
 attrs 参数必须是 0 或 DMA_ATTR_ALLOC_SINGLE_PAGES 。
 
@@ -449,7 +449,7 @@ int dma_get_cache_alignment(void)
 >
 > 这个 API 可能返回一个大于实际缓存行的数字，但它将保证一个或多个缓存行正好适合这个调用返回的宽度。为了便于对齐，它也始终是 2 的幂。
 
-## 第三部分 —— 调试驱动程序对DMA-API的使用
+## 第三部分 —— 调试驱动程序对 DMA-API 的使用
 
 上文介绍的 DMA-API 有一些限制。例如，DMA 地址必须使用相同大小的相应函数释放。随着硬件 IOMMU 的出现，驱动程序不违反这些约束变得越来越重要。在最坏的情况下，这种违规行为可能会导致数据损坏，甚至破坏文件系统。
 
@@ -517,4 +517,4 @@ DMA-API 调试代码的 debugfs 目录称为 dma-api/ 。在这个目录中，�
 void debug_dma_mapping_error(struct device *dev, dma_addr_t dma_addr);
 ```
 
-dma-debug 接口 debug_dma_mapping_error() 用于调试无法检查 dma_map_single() 和 dma_map_page() 接口返回的地址上的 DMA 映射错误的驱动程序。此接口清除由 debug_dma_map_page() 设置的标志，以表明驱动程序已调用 dma_mapping_error() 。当驱动程序取消映射时，debug_dma_unmap() 会检查该标志，如果该标志仍处于设置状态，则会打印警告消息，其中包括导致取消映射的调用跟踪。可以从 dma_mapping_error() 例程调用此接口，以启用 DMA 映射错误检查调试。
+dma-debug 接口 debug_dma_mapping_error() 用于调试无法检查 dma_map_single() 和 dma_map_page() 接口返回的地址上的 DMA 映射错误的驱动程序。此接口清除由 debug_dma_map_page() 设置的标志，以表明驱动程序已调用 dma_mapping_error()。当驱动程序取消映射时，debug_dma_unmap() 会检查该标志，如果该标志仍处于设置状态，则会打印警告消息，其中包括导致取消映射的调用跟踪。可以从 dma_mapping_error() 例程调用此接口，以启用 DMA 映射错误检查调试。
