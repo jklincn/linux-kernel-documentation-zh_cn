@@ -77,7 +77,7 @@ Cache management, managing CPU hotplug, etc.
 - [Memory Allocation Guide](https://docs.kernel.org/core-api/memory-allocation.html)
 - [Unaligned Memory Accesses](https://docs.kernel.org/core-api/unaligned-memory-access.html)
 - [使用通用设备的动态 DMA 映射](dma-api.md)
-- [Dynamic DMA mapping Guide](https://docs.kernel.org/core-api/dma-api-howto.html)
+- [动态 DMA 映射指南](dma-api-howto.md)
 - [DMA attributes](https://docs.kernel.org/core-api/dma-attributes.html)
 - [DMA with ISA and LPC devices](https://docs.kernel.org/core-api/dma-isa-lpc.html)
 - [Memory Management APIs](https://docs.kernel.org/core-api/mm-api.html)
