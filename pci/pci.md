@@ -145,7 +145,7 @@ echo "vendor device subvendor subdevice class class_mask driver_data" > \
 
 当驱动程序退出时，它只需调用 pci_unregister_driver()，PCI 层会自动为驱动程序处理的所有设备调用移除钩子函数。
 
-### 1.2.1. 驱动程序功能/数据的“属性”
+### 1.2.1. 驱动程序函数/数据的“属性”
 
 请在适当的地方标记初始化和清理函数（相应的宏在 <linux/init.h> 中定义）：
 
